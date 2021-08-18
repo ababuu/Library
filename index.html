@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Library</h1>
+            
+        </header>
+    
+        <section class="cards">  
+        </section>
+
+        <button class="openButton addBtn" onclick="openForm()"><strong>Add Book</strong></button>
+    
+        
+        <div class="formPopup" id="popupForm">
+            <form action="" class="formContainer">
+            <h2>Add a Book</h2>
+            <label for="author">
+                <strong>Author</strong>
+            </label>
+            <input class="author" type="text" id="author" placeholder="Author's name" name="author" required>
+            <label for="title">
+                <strong>Title</strong>
+            </label>
+            <input class="title" type="text" id="title" placeholder="Book's title" name="title" required>
+            <label for="pages">
+                <strong>Pages</strong>
+            </label>
+            <input class="pages" type="number" id="pages" placeholder="Page" name="pages" required>
+            <label for="status">
+                <strong>Status</strong>
+            </label>
+            <input class="status" type="text" id="status" placeholder="Read or not read" name="status" required>
+            <button  class="btn submit" ><strong>Submit</strong></button>
+            <button type="button" class="btn cancel" onclick="closeForm()"><strong>Close</strong></button>
+            </form>
+        </div>
+    
+
+    </main>
+</body>
+<script src="js/main.js"></script>
+</html>
