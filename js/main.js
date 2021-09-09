@@ -10,9 +10,9 @@ document.querySelector('.cancel').addEventListener('click', ()=>{
 
         
 const submitBtn=document.querySelector('.submit');
-
+let locallyStored=JSON.parse(localStorage.getItem('books'));
 let myLibrary=[];
-
+const section=document.querySelector('.cards');
 
 
 
@@ -23,18 +23,21 @@ submitBtn.addEventListener('click', e => {
                     document.getElementById('title').value,
                     document.getElementById('pages').value,
                     document.getElementById('status').value)
+    
 
-
-    myLibrary.pop();
     myLibrary.push(book);
-    console.log(myLibrary);
-    //console.log(i);
-    
-    // localStorage.setItem('Book List',JSON.stringify(myLibrary));
-    //console.log(JSON.parse(localStorage.getItem('Book List')));
-    
-    
-    const display=new displayBook(myLibrary)
+    let display;
+    if(locallyStored){
+        locallyStored.push(book);
+        localStorage.removeItem('books');
+        section.innerHTML='';
+        localStorage.setItem('books', JSON.stringify(locallyStored));
+        display=new displayBook(locallyStored);
+    }
+    else{
+        localStorage.setItem('books', JSON.stringify(myLibrary));
+        display=new displayBook(myLibrary);
+    }
     display.display();
     const close=new closeForm();
     close.close();
@@ -78,8 +81,8 @@ class displayBook{
             let pages=document.createElement('h4');
             let status=document.createElement('h4');
             let deleteBtn=document.createElement('img');
-            const section=document.querySelector('.cards');
-let card=document.createElement('article');
+            
+            let card=document.createElement('article');
             let switchToggle=document.createElement('label');
             let input=document.createElement('input');
             deleteBtn.src='https://cdn4.iconfinder.com/data/icons/social-messaging-ui-coloricon-1/21/52-512.png'
@@ -133,7 +136,7 @@ let card=document.createElement('article');
 
         
         }
-        //i++;
+        
 }
 
 
@@ -150,25 +153,11 @@ class closeForm {
     
 }
 
-// function load(){
-//     let storedValue= JSON.parse(localStorage.getItem('Book List'));
-    
-//     if (storedValue!=null){
-//         initiallyStored.push(storedValue);
-//         let storedLength=storedValue.length;
-        
-//         for(let x=0; x<storedLength; x++){
-            
-//             const display=new displayBook(storedValue);
-//             display.display();
-            
-//         }
-        
-        
-//     }
-//     //i--;
-//     //console.log(i);
-    
-// }
-
-// window.onload=load();
+window.onload=function(){
+    let locallyStored=JSON.parse(localStorage.getItem('books'));
+    console.log(locallyStored);
+    if(locallyStored==null) return;
+    localStorage.setItem("books", JSON.stringify(locallyStored));
+    let display=new displayBook(locallyStored);
+    display.display();
+}
